@@ -1,2 +1,2 @@
 # jbp
-Open Source Web Application Framework for Java. Offers an opinionated architecture to build enterprise software solutions with best practices on top of Java platforms. Provides the fundamental infrastructure, production-ready startup templates, application modules, UI themes, tooling, guides and documentation.
+JBP是一个开源应用程序框架,专注于基于Java的Web应用程序开发,但也支持开发其他类型的应用程序.
