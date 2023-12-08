@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.yufucn</groupId>
+        <artifactId>jbp</artifactId>
+        <version>1.0.1</version>
+    </parent>
+
+    <groupId>io.github.yufucn</groupId>
+    <artifactId>jbp-framework</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>jbp.core</module>
+        <module>jbp.ddd.domain.shared</module>
+        <module>jbp.auditing</module>
+        <module>jbp.caching</module>
+        <module>jbp.data</module>
+        <module>jbp.eventbus</module>
+        <module>jbp.exception</module>
+        <module>jbp.guids</module>
+        <module>jbp.mapping</module>
+        <module>jbp.specifications</module>
+        <module>jbp.timing</module>
+        <module>jbp.ddd.domain</module>
+        <module>jbp.tests</module>
+        <module>jbp.multitenancy.abstractions</module>
+        <module>jbp.multitenancy</module>
+        <module>jbp.security</module>
+        <module>jbp.ddd.application.contracts</module>
+        <module>jbp.ddd.application</module>
+        <module>jbp.springframework</module>
+        <module>jbp.springframework.mvc</module>
+        <module>jbp.springframework.mvc.contracts</module>
+    </modules>
+</project>
