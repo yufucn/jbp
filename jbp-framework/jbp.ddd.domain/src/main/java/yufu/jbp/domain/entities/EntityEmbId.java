@@ -13,7 +13,7 @@ import java.io.Serializable;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class EntityEmbId<TKey extends Serializable> implements Serializable {
+public abstract class EntityEmbId<TKey extends Serializable> implements Serializable, IEntity<TKey> {
     @EmbeddedId
     public TKey Id;
 }

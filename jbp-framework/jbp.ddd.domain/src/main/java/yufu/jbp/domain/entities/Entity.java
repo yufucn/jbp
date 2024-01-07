@@ -15,7 +15,7 @@ import java.io.Serializable;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Entity<TKey extends Serializable> implements Serializable {
+public abstract class Entity<TKey extends Serializable> implements Serializable, IEntity<TKey> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private TKey id;
