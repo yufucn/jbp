@@ -10,7 +10,7 @@ import yufu.jbp.domain.repositories.JbpRepository;
  * @author wang
  */
 @SpringBootApplication(scanBasePackages = {"org.yufu", "jbp.springframework"})
-@EnableJpaRepositories(repositoryBaseClass = JbpRepository.class)
+//@EnableJpaRepositories(repositoryBaseClass = JbpRepository.class)
 @EnableJpaAuditing
 public class TestApplication {
     public static void main(String[] args) {

@@ -5,10 +5,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.yufu.test.domain.User;
 import org.yufu.test.domain.UserRepository;
-import yufu.jbp.core.ISoftDelete;
-import yufu.jbp.data.IDataFilter;
-
-import java.io.Closeable;
 
 /**
  * @author wang

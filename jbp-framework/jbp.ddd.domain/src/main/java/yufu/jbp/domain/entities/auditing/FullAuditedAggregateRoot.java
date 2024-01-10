@@ -16,10 +16,10 @@ import java.io.Serializable;
 @MappedSuperclass
 @Getter
 @Setter
-//@EntityListeners(SoftDeleteEntityListener.class)
-public abstract class FullAuditedEntity<TKey extends Serializable>
-        extends AuditedEntity<TKey> implements SoftDeletable {
+@EntityListeners(SoftDeleteEntityListener.class)
+public abstract class FullAuditedAggregateRoot<TKey extends Serializable>
+        extends AuditedAggregateRoot<TKey> implements SoftDeletable {
 
     @SoftDelete
-    private Boolean deleted = false;
+    private Boolean deleted;
 }

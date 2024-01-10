@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * @author wang
  */
 @Repository
-@Scope("singleton")
+//@Scope("singleton")
 public interface UserRepository extends JpaRepository<User, Long> {
 }

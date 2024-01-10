@@ -4,8 +4,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import yufu.jbp.core.ISoftDelete;
-import yufu.jbp.domain.entities.auditing.FullAuditedEntity;
+import yufu.jbp.data.domain.SoftDeletable;
 import yufu.jbp.multitenancy.IMultiTenant;
 import yufu.jbp.specifications.ByIdSpecification;
 import yufu.jbp.specifications.MultiTenancySpecification;
@@ -13,9 +12,7 @@ import yufu.jbp.specifications.SoftDeletedSpecification;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.Predicate;
 import java.io.Serializable;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -40,8 +37,8 @@ public class JbpRepository<T, ID extends Serializable>
 
     @Override
     public void delete(T entity) {
-        if (entity instanceof ISoftDelete) {
-            ((ISoftDelete) entity).setDeleted(1);
+        if (entity instanceof SoftDeletable) {
+            ((SoftDeletable) entity).setDeleted(true);
             super.save(entity);
         } else {
             super.delete(entity);
@@ -50,7 +47,7 @@ public class JbpRepository<T, ID extends Serializable>
 
     @Override
     protected <S extends T> TypedQuery<Long> getCountQuery(Specification<S> spec, Class<S> domainClass) {
-        if (ISoftDelete.class.isAssignableFrom(domainClass)) {
+        if (SoftDeletable.class.isAssignableFrom(domainClass)) {
             if (spec == null) {
                 spec = softDeleted();
             } else {
@@ -64,7 +61,7 @@ public class JbpRepository<T, ID extends Serializable>
 
     @Override
     protected <S extends T> TypedQuery<S> getQuery(Specification<S> spec, Class<S> domainClass, Sort sort) {
-        if (ISoftDelete.class.isAssignableFrom(domainClass)) {
+        if (SoftDeletable.class.isAssignableFrom(domainClass)) {
             if (spec == null) {
                 spec = softDeleted();
             } else {
