@@ -4,15 +4,19 @@ package yufu.jbp.data;
  * @author wang
  */
 public class DataFilterScope implements AutoCloseable {
-    private final Class<?> filterClass;
+    private Class<?>[] filterClasses;
 
-    public DataFilterScope(Class<?> filterClass) {
-        this.filterClass = filterClass;
-        DataFilter.disable(filterClass);
+    public DataFilterScope(Class<?>... filterClasses) {
+        this.filterClasses = filterClasses;
+        for (Class<?> filterClass :filterClasses) {
+            DataFilter.disable(filterClass);
+        }
     }
 
     @Override
     public void close() {
-        DataFilter.enable(filterClass);
+        for (Class<?> filterClass :filterClasses) {
+            DataFilter.enable(filterClass);
+        }
     }
 }

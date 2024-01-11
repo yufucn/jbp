@@ -33,15 +33,16 @@ public class HomeController {
     public User get(
             @PathVariable Long id
     ) {
-        User u1 ;
-        try (DataFilterScope scope = new DataFilterScope(SoftDeletable.class)) {
-            u1 = userRepository.findById(id).orElse(null);
-        }
+//        User u1 ;
+//        try (DataFilterScope scope = new DataFilterScope(SoftDeletable.class)) {
+//            u1 = userRepository.findById(id).orElse(null);
+//        }
         User u2;
-        try (DataFilterScope scope = new DataFilterScope(MultiTenant.class)) {
-            u2 =  userRepository.findById(id).orElse(null);
+        try (DataFilterScope scope = new DataFilterScope(MultiTenant.class, SoftDeletable.class)) {
+            u2 = userRepository.findById(id).orElse(null);
         }
-
+        User u1 = userRepository.findById(id).orElse(null);
+        System.out.println(u1);
         return u2;
     }
 

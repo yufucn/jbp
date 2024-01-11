@@ -14,7 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public class DataFilter {
-    private static final ThreadLocal<Map<Class<?>, Boolean>> dataFilterStatus = ThreadLocal.withInitial(HashMap::new);
+    private static final ThreadLocal<ConcurrentHashMap<Class<?>, Boolean>>
+            dataFilterStatus = ThreadLocal.withInitial(ConcurrentHashMap::new);
 
     public static void disable(Class<?> filterClass) {
         dataFilterStatus.get().put(filterClass, Boolean.FALSE);

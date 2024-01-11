@@ -58,7 +58,7 @@ public class JbpRepository<T, ID extends Serializable>
         return super.getQuery(spec, domainClass, sort);
     }
 
-    private <S extends T> Specification<S> createFilterSpecification(Specification<S> spec, Class<S> domainClass) {
+    protected <S extends T> Specification<S> createFilterSpecification(Specification<S> spec, Class<S> domainClass) {
         if (SoftDeletable.class.isAssignableFrom(domainClass) && DataFilter.isEnabled(SoftDeletable.class)) {
             if (spec == null) {
                 spec = softDeleted();
