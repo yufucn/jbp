@@ -3,7 +3,7 @@ package yufu.jbp.multitenancy;
 /**
  * @author wang
  */
-public interface IMultiTenant {
+public interface MultiTenant {
     String getTenantId();
 
     void setTenantId(String value);

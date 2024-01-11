@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.yufu.test.domain.User;
 import org.yufu.test.domain.UserRepository;
+import yufu.jbp.data.DataFilterScope;
+import yufu.jbp.data.domain.SoftDeletable;
+import yufu.jbp.multitenancy.MultiTenant;
 
 /**
  * @author wang
@@ -30,7 +33,16 @@ public class HomeController {
     public User get(
             @PathVariable Long id
     ) {
-        return userRepository.findById(id).orElse(null);
+        User u1 ;
+        try (DataFilterScope scope = new DataFilterScope(SoftDeletable.class)) {
+            u1 = userRepository.findById(id).orElse(null);
+        }
+        User u2;
+        try (DataFilterScope scope = new DataFilterScope(MultiTenant.class)) {
+            u2 =  userRepository.findById(id).orElse(null);
+        }
+
+        return u2;
     }
 
     @GetMapping("/delete/{id}")

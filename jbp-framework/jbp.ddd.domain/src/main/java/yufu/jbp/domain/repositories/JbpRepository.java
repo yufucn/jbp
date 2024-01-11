@@ -4,8 +4,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import yufu.jbp.data.DataFilter;
 import yufu.jbp.data.domain.SoftDeletable;
-import yufu.jbp.multitenancy.IMultiTenant;
+import yufu.jbp.multitenancy.MultiTenant;
 import yufu.jbp.specifications.ByIdSpecification;
 import yufu.jbp.specifications.MultiTenancySpecification;
 import yufu.jbp.specifications.SoftDeletedSpecification;
@@ -47,31 +48,28 @@ public class JbpRepository<T, ID extends Serializable>
 
     @Override
     protected <S extends T> TypedQuery<Long> getCountQuery(Specification<S> spec, Class<S> domainClass) {
-        if (SoftDeletable.class.isAssignableFrom(domainClass)) {
-            if (spec == null) {
-                spec = softDeleted();
-            } else {
-                spec = spec.and(softDeleted());
-            }
-        }
-
-
+        spec = createFilterSpecification(spec, domainClass);
         return super.getCountQuery(spec, domainClass);
     }
 
     @Override
     protected <S extends T> TypedQuery<S> getQuery(Specification<S> spec, Class<S> domainClass, Sort sort) {
-        if (SoftDeletable.class.isAssignableFrom(domainClass)) {
+        spec = createFilterSpecification(spec, domainClass);
+        return super.getQuery(spec, domainClass, sort);
+    }
+
+    private <S extends T> Specification<S> createFilterSpecification(Specification<S> spec, Class<S> domainClass) {
+        if (SoftDeletable.class.isAssignableFrom(domainClass) && DataFilter.isEnabled(SoftDeletable.class)) {
             if (spec == null) {
                 spec = softDeleted();
             } else {
                 spec = spec.and(softDeleted());
             }
         }
-        if (IMultiTenant.class.isAssignableFrom(domainClass)) {
+        if (MultiTenant.class.isAssignableFrom(domainClass) && DataFilter.isEnabled(MultiTenant.class)) {
             spec = spec.and(multiTenant("yufu"));
         }
-        return super.getQuery(spec, domainClass, sort);
+        return spec;
     }
 
     private <T> Specification<T> softDeleted() {
@@ -82,5 +80,4 @@ public class JbpRepository<T, ID extends Serializable>
 
         return Specification.where(new MultiTenancySpecification<T>(tenantId));
     }
-
 }
