@@ -143,6 +143,7 @@
                 <artifactId>jakarta.persistence-api</artifactId>
                 <version>2.2.3</version>
             </dependency>
+
             <dependency>
                 <groupId>io.github.yufucn</groupId>
                 <artifactId>jbp.auditing</artifactId>
