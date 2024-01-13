@@ -13,4 +13,8 @@ public class TenantIdHolder {
     public static String getTenantId() {
         return tenantIdThreadLocal.get();
     }
+
+    public static void clearTenantId() {
+        tenantIdThreadLocal.remove();
+    }
 }

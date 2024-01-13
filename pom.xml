@@ -211,7 +211,7 @@
             </dependency>
             <dependency>
                 <groupId>io.github.yufucn</groupId>
-                <artifactId>yufu.jbp.multitenancy</artifactId>
+                <artifactId>jbp.multitenancy</artifactId>
                 <version>${jbp.version}</version>
             </dependency>
             <dependency>

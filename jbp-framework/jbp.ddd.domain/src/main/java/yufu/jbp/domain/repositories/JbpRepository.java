@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import yufu.jbp.data.DataFilter;
 import yufu.jbp.data.domain.SoftDeletable;
 import yufu.jbp.multitenancy.MultiTenant;
+import yufu.jbp.multitenancy.TenantId;
+import yufu.jbp.multitenancy.TenantIdHolder;
 import yufu.jbp.specifications.ByIdSpecification;
 import yufu.jbp.specifications.MultiTenancySpecification;
 import yufu.jbp.specifications.SoftDeletedSpecification;
@@ -67,7 +69,7 @@ public class JbpRepository<T, ID extends Serializable>
             }
         }
         if (MultiTenant.class.isAssignableFrom(domainClass) && DataFilter.isEnabled(MultiTenant.class)) {
-            spec = spec.and(multiTenant("yufu"));
+            spec = spec.and(multiTenant());
         }
         return spec;
     }
@@ -76,8 +78,8 @@ public class JbpRepository<T, ID extends Serializable>
         return Specification.where(new SoftDeletedSpecification<>());
     }
 
-    private <T> Specification<T> multiTenant(String tenantId) {
+    private <T> Specification<T> multiTenant() {
 
-        return Specification.where(new MultiTenancySpecification<T>(tenantId));
+        return Specification.where(new MultiTenancySpecification<T>(TenantIdHolder.getTenantId()));
     }
 }
