@@ -19,7 +19,7 @@ public class TenantListener {
 
     private void setTenantId(Object entity) {
         if (entity.getClass().isAnnotationPresent(TenantId.class)) {
-            String tenantId = TenantIdHolder.getTenantId();
+            String tenantId = TenantContext.getCurrentTenant();
             if (entity instanceof MultiTenant) {
                 MultiTenant e = (MultiTenant) (entity);
                 e.setTenantId(tenantId);

@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import yufu.jbp.data.DataFilter;
 import yufu.jbp.data.domain.SoftDeletable;
 import yufu.jbp.multitenancy.MultiTenant;
-import yufu.jbp.multitenancy.TenantId;
-import yufu.jbp.multitenancy.TenantIdHolder;
+import yufu.jbp.multitenancy.TenantContext;
 import yufu.jbp.specifications.ByIdSpecification;
 import yufu.jbp.specifications.MultiTenancySpecification;
 import yufu.jbp.specifications.SoftDeletedSpecification;
@@ -80,6 +79,6 @@ public class JbpRepository<T, ID extends Serializable>
 
     private <T> Specification<T> multiTenant() {
 
-        return Specification.where(new MultiTenancySpecification<T>(TenantIdHolder.getTenantId()));
+        return Specification.where(new MultiTenancySpecification<T>(TenantContext.getCurrentTenant()));
     }
 }

@@ -2,7 +2,7 @@ package jbp.springframework.mvc;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import yufu.jbp.multitenancy.TenantIdHolder;
+import yufu.jbp.multitenancy.TenantContext;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +19,7 @@ public class TenantIdInterceptor implements HandlerInterceptor {
         String tenantId = request.getHeader(TENANT_ID_HEADER);
 
 
-        TenantIdHolder.setTenantId(tenantId);
+        TenantContext.setCurrentTenant(tenantId);
 
         return true;
     }
@@ -27,6 +27,6 @@ public class TenantIdInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         // 在请求处理后清除TenantId
-        TenantIdHolder.clearTenantId();
+        TenantContext.clear();
     }
 }

@@ -11,3 +11,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+multitenancy:
+ tenants:
+   yufu1:
+     url: jdbc:mysql://localhost:3306/jbp
+     username: root
+     password: root
+     driver-class-name: com.mysql.cj.jdbc.Driver
