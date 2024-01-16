@@ -1,5 +1,6 @@
 package org.yufu.test.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,8 @@ import yufu.jbp.data.DataFilterScope;
 import yufu.jbp.data.domain.SoftDeletable;
 import yufu.jbp.multitenancy.MultiTenant;
 
+import javax.sql.DataSource;
+
 /**
  * @author wang
  */
@@ -16,6 +19,9 @@ import yufu.jbp.multitenancy.MultiTenant;
 public class HomeController {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    private DataSource dataSource;
 
     public HomeController(UserRepository userRepository) {
         this.userRepository = userRepository;
