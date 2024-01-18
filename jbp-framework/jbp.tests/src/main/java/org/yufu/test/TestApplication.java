@@ -24,47 +24,10 @@ import javax.sql.DataSource;
 @SpringBootApplication(scanBasePackages = {"org.yufu",
         "yufu.jbp",
         "jbp.springframework"})
-@EnableJpaRepositories(
-        repositoryBaseClass = JbpRepository.class,
-        basePackages = "org.yufu.test",
-        entityManagerFactoryRef = "entityManagerFactory",
-        transactionManagerRef = "transactionManager")
+@EnableJpaRepositories(repositoryBaseClass = JbpRepository.class)
 @EnableJpaAuditing
 public class TestApplication {
     public static void main(String[] args) {
         SpringApplication.run(TestApplication.class, args);
     }
-
-
-    @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            EntityManagerFactoryBuilder builder,
-            DataSource dataSource) {
-        return builder
-                .dataSource(dataSource)
-                .packages("org.yufu.test.domain")
-                .persistenceUnit("master")
-                .build();
-    }
-
-    @Bean(name = "transactionManager")
-    public PlatformTransactionManager transactionManager(
-            @Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory) {
-        return new JpaTransactionManager(entityManagerFactory);
-    }
-
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-//            EntityManagerFactoryBuilder builder, DataSource dataSource) {
-//        return builder
-//                .dataSource(dataSource)
-//                .packages("org.yufu.test")
-//                .persistenceUnit("master")
-//                .build();
-//    }
-//
-//    @Bean
-//    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-//        return new JpaTransactionManager(entityManagerFactory);
-//    }
 }
