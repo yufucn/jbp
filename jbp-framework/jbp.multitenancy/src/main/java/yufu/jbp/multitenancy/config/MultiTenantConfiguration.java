@@ -1,8 +1,5 @@
 package yufu.jbp.multitenancy.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -41,7 +38,7 @@ public class MultiTenantConfiguration {
             resolvedDataSources.put(key, createDataSource(value));
         });
         MultiTenantDataSource dataSource = new MultiTenantDataSource();
-        dataSource.setDefaultTargetDataSource(resolvedDataSources.get(tenants.get("master")));
+//        dataSource.setDefaultTargetDataSource(resolvedDataSources.get(tenants.get("master")));
         dataSource.setTargetDataSources(resolvedDataSources);
         return dataSource;
     }
@@ -54,15 +51,4 @@ public class MultiTenantConfiguration {
         dataSource.setPassword(config.getPassword());
         return dataSource;
     }
-
-
-//    @Primary
-//    @Bean(name = "dataSource")
-//    @ConfigurationProperties(prefix = "spring.datasource")
-//    public DataSource primaryDataSource() {
-//        return DataSourceBuilder.create().build();
-//    }
-
-
-
 }

@@ -2,11 +2,9 @@ package yufu.jbp.domain.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import yufu.jbp.guids.SnowflakeIdGenerator;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -17,6 +15,5 @@ import java.io.Serializable;
 @Setter
 public abstract class Entity<TKey extends Serializable> implements Serializable, IEntity<TKey> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private TKey id;
 }

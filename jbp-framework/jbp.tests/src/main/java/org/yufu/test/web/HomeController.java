@@ -8,6 +8,7 @@ import org.yufu.test.domain.User;
 import org.yufu.test.domain.UserRepository;
 import yufu.jbp.data.DataFilterScope;
 import yufu.jbp.data.domain.SoftDeletable;
+import yufu.jbp.guids.SnowflakeIdGenerator;
 import yufu.jbp.multitenancy.MultiTenant;
 
 import javax.sql.DataSource;
@@ -43,6 +44,7 @@ public class HomeController {
 //        try (DataFilterScope scope = new DataFilterScope(SoftDeletable.class)) {
 //            u1 = userRepository.findById(id).orElse(null);
 //        }
+        Long id1 = SnowflakeIdGenerator.generateId();
         User u1 = userRepository.findById(id).orElse(null);
         return u1;
     }

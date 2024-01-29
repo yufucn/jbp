@@ -3,6 +3,7 @@ package org.yufu.test.domain;
 import lombok.Getter;
 import lombok.Setter;
 import yufu.jbp.domain.entities.auditing.FullAuditedEntity;
+import yufu.jbp.domain.entities.support.EntityLongIdListener;
 import yufu.jbp.multitenancy.MultiTenant;
 import yufu.jbp.multitenancy.TenantId;
 import yufu.jbp.multitenancy.TenantListener;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@EntityListeners(TenantListener.class)
+@EntityListeners({TenantListener.class, EntityLongIdListener.class})
 public class User extends FullAuditedEntity<Long> implements MultiTenant {
 
     private String name;

@@ -52,5 +52,9 @@
             <groupId>io.github.yufucn</groupId>
             <artifactId>jbp.multitenancy</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.github.yufucn</groupId>
+            <artifactId>jbp.guids</artifactId>
+        </dependency>
     </dependencies>
 </project>
