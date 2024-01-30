@@ -1,4 +1,4 @@
-package yufu.jbp.multitenancy.config;
+package jbp.springframework.mvc.multitenancy;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -36,6 +36,11 @@ public class JpaEntityManager {
         Map<String, String> properties = new HashMap<>();
         properties.put("hibernate.physical_naming_strategy",
                 "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
+        properties.put("hibernate.hbm2ddl.auto",
+                "update");
+        properties.put("hibernate.dialect",
+                "org.hibernate.dialect.MySQL5Dialect");
+
 
         return builder
                 .dataSource(routingDataSource)

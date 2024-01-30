@@ -1,4 +1,4 @@
-package yufu.jbp.multitenancy;
+package jbp.springframework.mvc.multitenancy;
 
 import lombok.Getter;
 import lombok.Setter;

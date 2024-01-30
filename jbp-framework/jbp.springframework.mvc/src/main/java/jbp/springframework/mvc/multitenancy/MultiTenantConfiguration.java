@@ -1,18 +1,10 @@
-package yufu.jbp.multitenancy.config;
+package jbp.springframework.mvc.multitenancy;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
-import yufu.jbp.multitenancy.DataSourceConfig;
 import yufu.jbp.multitenancy.MultiTenantDataSource;
-import yufu.jbp.multitenancy.config.MultiTenancyProperties;
 
-import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;

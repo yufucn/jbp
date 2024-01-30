@@ -11,7 +11,11 @@ public class TenantContext {
     }
 
     public static String getCurrentTenant() {
-        return currentTenant.get();
+        String current = currentTenant.get();
+        if (null == current) {
+            return "default";
+        }
+        return current;
     }
 
     public static void clear() {
