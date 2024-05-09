@@ -2,11 +2,8 @@ package org.yufu.test.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import yufu.jbp.domain.entities.auditing.FullAuditedEntity;
-import yufu.jbp.domain.entities.auditing.FullAuditedEntityEmbId;
+import io.github.yufucn.jbp.domain.entities.auditing.FullAuditedEntityEmbId;
 
-import javax.persistence.Embedded;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
 /**

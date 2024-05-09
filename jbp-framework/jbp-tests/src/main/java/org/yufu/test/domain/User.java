@@ -2,11 +2,11 @@ package org.yufu.test.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import yufu.jbp.domain.entities.auditing.FullAuditedEntity;
-import yufu.jbp.domain.entities.support.EntityLongIdListener;
-import yufu.jbp.multitenancy.MultiTenant;
-import yufu.jbp.multitenancy.TenantId;
-import yufu.jbp.multitenancy.TenantListener;
+import io.github.yufucn.jbp.domain.entities.auditing.FullAuditedEntity;
+import io.github.yufucn.jbp.domain.entities.support.EntityLongIdListener;
+import io.github.yufucn.jbp.multitenancy.MultiTenant;
+import io.github.yufucn.jbp.multitenancy.TenantId;
+import io.github.yufucn.jbp.multitenancy.TenantListener;
 
 import javax.persistence.*;
 

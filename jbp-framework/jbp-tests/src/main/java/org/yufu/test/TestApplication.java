@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import yufu.jbp.domain.repositories.JbpRepository;
+import io.github.yufucn.jbp.domain.repositories.JbpRepository;
 
 
 /**

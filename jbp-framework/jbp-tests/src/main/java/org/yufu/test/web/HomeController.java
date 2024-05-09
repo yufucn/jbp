@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.yufu.test.domain.User;
 import org.yufu.test.domain.UserRepository;
-import yufu.jbp.data.DataFilterScope;
-import yufu.jbp.data.domain.SoftDeletable;
-import yufu.jbp.guids.SnowflakeIdGenerator;
-import yufu.jbp.multitenancy.MultiTenant;
+import io.github.yufucn.jbp.guids.SnowflakeIdGenerator;
 
 import javax.sql.DataSource;
 
