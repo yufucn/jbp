@@ -1,5 +1,9 @@
 package org.yufu.test.web;
 
+import io.github.yufucn.jbp.exception.AuthorizationException;
+import io.github.yufucn.jbp.exception.EntityNotFoundException;
+import io.github.yufucn.jbp.exception.ForbiddenException;
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +27,11 @@ public class HomeController {
 
     public HomeController(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @GetMapping("/home")
+    public String index(){
+        throw new AuthorizationException("hehda");
     }
 
     @GetMapping("/add")

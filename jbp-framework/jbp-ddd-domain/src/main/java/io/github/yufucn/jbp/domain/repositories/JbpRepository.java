@@ -25,12 +25,10 @@ import java.util.Optional;
 public class JbpRepository<T, ID extends Serializable>
         extends SimpleJpaRepository<T, ID> {
 
-    private final EntityManager entityManager;
     private final JpaEntityInformation<T, ?> entityInformation;
 
     public JbpRepository(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
-        this.entityManager = entityManager;
         this.entityInformation = entityInformation;
     }
 

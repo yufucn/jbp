@@ -1,4 +1,10 @@
+server:
+  servlet:
+    context-path: /test
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     url: jdbc:mysql://localhost:3306/jbp
     username: root
@@ -10,28 +16,4 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      naming:
-        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-      dialect: org.hibernate.dialect.MySQLDialect
       ddl-auto: update
-    properties:
-      hibernate:
-        naming:
-          implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
-          physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-        dialect: org.hibernate.dialect.MySQLDialect
-        ddl-auto: update
-multitenancy:
- packages: org.yufu.test
- tenants:
-   default:
-     url: jdbc:mysql://localhost:3306/jbp_default
-     username: root
-     password: root
-     driver-class-name: com.mysql.cj.jdbc.Driver
-   yufu:
-     url: jdbc:mysql://localhost:3306/jbp_yufu
-     username: root
-     password: root
-     driver-class-name: com.mysql.cj.jdbc.Driver

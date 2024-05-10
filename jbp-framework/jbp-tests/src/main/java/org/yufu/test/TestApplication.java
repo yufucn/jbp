@@ -12,9 +12,11 @@ import io.github.yufucn.jbp.domain.repositories.JbpRepository;
  */
 @SpringBootApplication(scanBasePackages = {
         "org.yufu",
-        "yufu.jbp",
-        "jbp.springframework"})
-@EnableJpaRepositories(repositoryBaseClass = JbpRepository.class)
+        "io.github.yufucn"
+        })
+@EnableJpaRepositories(
+//        repositoryBaseClass = JbpRepository.class
+)
 @EnableJpaAuditing
 public class TestApplication {
     public static void main(String[] args) {

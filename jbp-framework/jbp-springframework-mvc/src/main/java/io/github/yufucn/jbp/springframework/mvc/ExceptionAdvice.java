@@ -3,6 +3,8 @@ package io.github.yufucn.jbp.springframework.mvc;
 import io.github.yufucn.jbp.exception.AuthorizationException;
 import io.github.yufucn.jbp.exception.EntityNotFoundException;
 import io.github.yufucn.jbp.exception.ForbiddenException;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,8 @@ import java.util.Map;
  * @author wang
  */
 @RestControllerAdvice
-public class ExceptionAdvice extends ResponseEntityExceptionHandler {
+@Order(Ordered.HIGHEST_PRECEDENCE)
+public class ExceptionAdvice{
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -43,30 +46,24 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Throwable.class)
-    public ResponseEntity<Object> runtime(RuntimeException ex, WebRequest request) {
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+    public Object runtime(RuntimeException ex) {
         String code = "fail";
         if (ex instanceof AuthorizationException) {
             AuthorizationException e = (AuthorizationException) ex;
             code = e.getCode();
-            status = HttpStatus.valueOf(e.getHttpStatusCode());
         }
         if (ex instanceof ForbiddenException) {
             ForbiddenException e = (ForbiddenException) ex;
             code = e.getCode();
-            status = HttpStatus.valueOf(e.getHttpStatusCode());
         }
         if (ex instanceof EntityNotFoundException) {
             EntityNotFoundException e = (EntityNotFoundException) ex;
             code = e.getCode();
-            status = HttpStatus.valueOf(e.getHttpStatusCode());
         }
-        Response<Object> response = Response.builder()
+        return Response.builder()
                 .message(ex.getMessage())
                 .code(code)
                 .build();
-        return handleExceptionInternal(ex, response,
-                new HttpHeaders(), status, request);
 
     }
 }
