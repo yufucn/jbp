@@ -27,5 +27,9 @@
             <groupId>io.github.yufucn</groupId>
             <artifactId>jbp-mapping</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.github.yufucn</groupId>
+            <artifactId>jbp-exception</artifactId>
+        </dependency>
     </dependencies>
 </project>

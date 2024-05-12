@@ -2,6 +2,7 @@ package io.github.yufucn.jbp.ddd.application.services;
 
 import io.github.yufucn.jbp.ddd.application.query.PagedAndSortedQuery;
 import io.github.yufucn.jbp.ddd.application.query.PagedQuery;
+import io.github.yufucn.jbp.exception.EntityNotFoundException;
 import io.github.yufucn.jbp.mapping.IMapper;
 import lombok.var;
 import org.springframework.data.domain.Page;
@@ -11,7 +12,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import io.github.yufucn.jbp.domain.repositories.IRepository;
 
-import javax.persistence.EntityNotFoundException;
 import javax.persistence.MappedSuperclass;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public abstract class CrudAppService<
     @Override
     public TDto get(TKey id) {
         TEntity entity = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Entity " + id + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException(id + "不存在"));
         return mapper.toDto(entity);
     }
 
@@ -64,7 +64,7 @@ public abstract class CrudAppService<
     @Override
     public TDto update(TKey id, TUpdate update) {
         var entity = repository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Entity " + id + " not found"));
+                new EntityNotFoundException(id + "不存在"));
         mapper.merge(update, entity);
         repository.save(entity);
         return mapper.toDto(entity);
