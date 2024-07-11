@@ -17,6 +17,7 @@ public interface IMapper<
         TUpdate> {
     TDto toDto(TEntity entity);
 
+
     TListDto toListDto(TEntity entity);
 
     TEntity toEntity(TCreate create);

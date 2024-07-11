@@ -11,8 +11,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import io.github.yufucn.jbp.domain.repositories.IRepository;
+import sun.reflect.generics.tree.TypeTree;
 
 import javax.persistence.MappedSuperclass;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,7 @@ public abstract class CrudAppService<
         TCreate,
         TUpdate>
         implements ICrudAppService<TKey, TDto, TListDto, TQuery, TCreate, TUpdate> {
-
+    private String entityName;
     protected final IRepository<TEntity, TKey> repository;
     protected final IMapper<TEntity, TDto, TListDto, TCreate, TUpdate> mapper;
 
@@ -37,12 +40,18 @@ public abstract class CrudAppService<
                           IMapper<TEntity, TDto, TListDto, TCreate, TUpdate> mapper) {
         this.repository = repository;
         this.mapper = mapper;
+        Type type = ((ParameterizedType)
+                this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        String typeName = type.getTypeName();
+        int lastIndex = typeName.lastIndexOf(".");
+        this.entityName = typeName.substring(lastIndex + 1);
     }
 
     @Override
     public TDto get(TKey id) {
         TEntity entity = repository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(id + "不存在"));
+                .orElseThrow(() -> new EntityNotFoundException(
+                        id + "不存在", entityName));
         return mapper.toDto(entity);
     }
 
@@ -64,7 +73,7 @@ public abstract class CrudAppService<
     @Override
     public TDto update(TKey id, TUpdate update) {
         var entity = repository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException(id + "不存在"));
+                new EntityNotFoundException(id + "不存在", entityName));
         mapper.merge(update, entity);
         repository.save(entity);
         return mapper.toDto(entity);
@@ -102,7 +111,7 @@ public abstract class CrudAppService<
         return mapper.toListDto(entity);
     }
 
-    protected List<TListDto> toListDtos(List<TEntity> entities) {
+    protected List<TListDto> toListDto(List<TEntity> entities) {
         List<TListDto> result = new ArrayList<>();
         for (TEntity entity : entities) {
             result.add(toListDto(entity));
@@ -110,7 +119,7 @@ public abstract class CrudAppService<
         return result;
     }
 
-    protected List<TDto> toDtos(List<TEntity> entities) {
+    protected List<TDto> toDto(List<TEntity> entities) {
         List<TDto> result = new ArrayList<>();
         for (TEntity entity : entities) {
             result.add(mapper.toDto(entity));
